@@ -82,12 +82,19 @@ body {
 }
 .main-area {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 1fr;
   gap: var(--space-6);
   padding: var(--space-6);
 }
+
+/* When explicitly marked as no-sidebar, ensure single-column full width */
+.main-area.no-sidebar {
+  grid-template-columns: 1fr;
+}
+
 @media (max-width: 900px) {
-  .main-area {
+  .main-area,
+  .main-area.no-sidebar {
     grid-template-columns: 1fr;
   }
 }
