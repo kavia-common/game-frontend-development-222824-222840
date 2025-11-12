@@ -50,6 +50,13 @@
   width: 100%;
   height: 100%;
   display: block;
+  /* keep interactions on the top-most if needed */
+}
+
+.game-canvas-wrapper-169 .layer:last-child {
+  /* Encourage interactions on UI canvas for touch */
+  touch-action: none;
+  cursor: crosshair;
 }
 
 /* Optional: pointer-events only on the top-most UI layer typically.
