@@ -1,82 +1,86 @@
-# Lightweight React Template for KAVIA
+# Ocean Professional Game Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+Modern, lightweight game UI implemented in React with a clean layout and blue/amber accents.
 
-## Features
+## Quick Start
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Install dependencies: `npm install`
+- Start dev server: `npm start` (default http://localhost:3000)
+- Build production: `npm run build`
 
-## Getting Started
+Ensure required environment variables are set (see `.env.example`).
 
-In the project directory, you can run:
+## Theme
 
-### `npm start`
+The Ocean Professional theme is defined in `src/styles/theme.css`:
+- Primary: `#2563EB` (blue)
+- Secondary: `#F59E0B` (amber)
+- Background/Surface/Text variables with dark mode support via `html[data-theme]`.
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Toggle theme using the header button.
 
-### `npm test`
+## App Structure
 
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+```
+src/
+  components/
+    common/
+      Button.jsx
+      Icon.jsx
+    game/
+      Cell.jsx
+      GameBoard.jsx
+      HUD.jsx
+      Controls.jsx
+      ScorePanel.jsx
+      Timer.jsx
+    layout/
+      Header.jsx
+      Sidebar.jsx
+      Footer.jsx
+      PageContainer.jsx
+  hooks/
+    useTheme.js
+    useWebSocket.js
+  pages/
+    Home.jsx
+    Game.jsx
+    Settings.jsx
+    HowToPlay.jsx
+  utils/
+    env.js
+  styles/
+    theme.css
+  App.js
+  index.js
 ```
 
-### Components
+## Routing
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+Implemented using `react-router-dom`:
+- `/` Home
+- `/game` Game
+- `/settings` Settings
+- `/how-to-play` How To Play
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+## WebSocket
 
-## Learn More
+Hook `useWebSocket(path, options)` builds the URL from `REACT_APP_WS_URL` and auto-reconnects.
+- Use `send(payload)` to publish messages.
+- Subscribe with `onMessage` option.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Environment Variables
 
-### Code Splitting
+See `.env.example`. Do not commit real values. At minimum:
+- `REACT_APP_API_BASE` or `REACT_APP_BACKEND_URL`
+- `REACT_APP_WS_URL`
+- `REACT_APP_FRONTEND_URL`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Accessibility
 
-### Analyzing the Bundle Size
+- Buttons and interactive components include proper ARIA where applicable.
+- Color contrast maintained with theme choices.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Notes
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This is a scaffold following the Figma theme. Wire up actual game logic and server events as backend contracts are defined.
