@@ -1,0 +1,64 @@
+.game-canvas-host {
+  /* Fit available vertical space within the main layout area */
+  width: 100%;
+  /* Height will be managed by the wrapper's aspect ratio.
+     Use min-height to ensure presence and allow it to expand with content area */
+  min-height: 320px;
+
+  /* Themed surface already applied from Page section wrapper; keep padding consistent */
+  padding: var(--space-6);
+  display: grid;
+  place-items: center;
+
+  /* Respect the Ocean Professional surface look */
+  background: var(--color-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Responsive 16:9 wrapper centered */
+.game-canvas-wrapper-169 {
+  position: relative;
+  width: 100%;
+  /* Keep it within sensible bounds of the container */
+  max-width: 1200px;
+  /* Aspect ratio for modern browsers */
+  aspect-ratio: 16 / 9;
+
+  /* Fallback for older browsers: lock height based on width using padding-top */
+  height: auto;
+}
+
+.game-canvas-wrapper-169::before {
+  /* Fallback aspect ratio helper (only used when aspect-ratio unsupported) */
+  content: "";
+  float: left;
+  padding-top: calc(100% * 9 / 16);
+}
+
+.game-canvas-wrapper-169::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Layered canvases: absolute stacked, full size */
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Optional: pointer-events only on the top-most UI layer typically.
+   If needed, target specific canvas with a class like .ui. For now, allow events. */
+
+/* Ensure inside main content this section can stretch to use space */
+.page-game-flex-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
